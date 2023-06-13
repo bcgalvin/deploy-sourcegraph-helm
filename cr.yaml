@@ -1,0 +1,6 @@
+owner: bcgalvin
+git-repo: charts
+repo: deploy-sourcegraph-helm
+charts-dir: charts/*
+charts_repo_url: "https://bcgalvin.github.io/deploy-sourcegraph-helm"
+SkipExisting: true
