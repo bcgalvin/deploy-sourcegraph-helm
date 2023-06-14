@@ -55,7 +55,7 @@ executor:
     EXECUTOR_QUEUE_NAME:
       value: "codeintel"
     EXECUTOR_MAXIMUM_NUM_JOBS:
-      value: "3"
+      value: "2"
     EXECUTOR_USE_FIRECRACKER:
       value: "false"
     EXECUTOR_JOB_NUM_CPUS:
@@ -66,3 +66,5 @@ executor:
       value: "tcp://localhost:2375"
     TMPDIR:
       value: "/scratch"
+    EXECUTOR_KEEP_WORKSPACES:
+      value: "true"
