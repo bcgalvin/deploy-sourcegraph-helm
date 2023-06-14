@@ -40,8 +40,6 @@ storageClass:
 
 executor:
   enabled: true
-  image:
-    name: "executor"
   resources:
     limits:
       cpu: "20"

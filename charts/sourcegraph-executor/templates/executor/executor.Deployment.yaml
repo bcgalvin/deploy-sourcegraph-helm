@@ -4,10 +4,9 @@ kind: Deployment
 metadata:
   name: executor
   annotations:
-    description: Runs sourcegraph executors
+    description: Runs sourcegraph executor replicas for batch changes and codeintel auto indexing.
     kubectl.kubernetes.io/default-container: executor
   labels:
-    app: executor
     deploy: sourcegraph
     sourcegraph-resource-requires: no-cluster-admin
     app.kubernetes.io/component: executor
@@ -25,15 +24,12 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        kubectl.kubernetes.io/default-container: executor
       labels:
-        deploy: sourcegraph
         app: executor
     spec:
       containers:
         - name: executor
-          image: index.docker.io/sourcegraph/executor:insiders@sha256:be100f4c6aceac22f265e515148ccf7af9b9499dd671b641b55809263f57e306
+          image: index.docker.io/sourcegraph/executor:insiders@sha256:deda81624796df31b56bdaa6820b3332eaa2cbe5e1729886d15ce3c6f57b69b5
           imagePullPolicy: Always
           livenessProbe:
             exec:
@@ -58,16 +54,16 @@ spec:
             - mountPath: /scratch
               name: executor-scratch
         - name: dind
-          image: index.docker.io/sourcegraph/dind:insiders@sha256:f189fc027afd01f1f1ed69a8bee6b7f40819c7a55b34d623fd374c272ff5a243
+          image: index.docker.io/sourcegraph/dind:insiders@sha256:06a4a6ac7c200cdd14ebb1cde5be3f02e5df525e1a3e4c1bc258b08e514e550c
           imagePullPolicy: Always
           securityContext:
             privileged: true
           command:
-            - 'dockerd'
-            - '--tls=false'
-            - '--mtu=1200'
-            - '--registry-mirror=http://executor:5000'
-            - '--host=tcp://0.0.0.0:2375'
+            - "dockerd"
+            - "--tls=false"
+            - "--mtu=1200"
+            - "--registry-mirror=http://private-docker-registry:5000"
+            - "--host=tcp://0.0.0.0:2375"
           livenessProbe:
             tcpSocket:
               port: 2375
@@ -100,9 +96,10 @@ spec:
           emptyDir:
             # Ensure we don't cause disk pressure on nodes. This value can be adjusted based on the size of the batch change or code intel requirements.
             # Refer to https://docs.sourcegraph.com/admin/executors/deploy_executors#resource-recommendations for more information
-            sizeLimit: 200Gi
+            sizeLimit: 100Gi
         - name: docker-config
           configMap:
             defaultMode: 420
             name: docker-config
+
 {{- end }}
