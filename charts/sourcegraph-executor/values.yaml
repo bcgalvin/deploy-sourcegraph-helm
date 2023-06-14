@@ -38,52 +38,6 @@ storageClass:
   reclaimPolicy: Retain
 
 
-# Generic application configuration options, used by most applications below
-# app: # Generally matches directory name
-#   replicaCount: 1
-#
-#   image:
-#     # Application-specific default tag. Overrides the global tag. Do not modify - use tag instead
-#     defaultTag:
-#     # Override the default tag on a service-specific basis
-#     tag:
-#     # Override the default docker image name
-#     name:
-#
-#   # Add additional labels and annotations to various resources
-#   labels: {}
-#   podLabels: {}
-#   podAnnotations: {}
-#   serviceLabels: {}
-#   serviceAnnotations: {}
-#   # Override default service/deployment names
-#   name: ""
-#   # Provide custom environment variables
-#   env: {}
-#   # Set resource requests / limits
-#   resources: {}
-#   podSecurityContext: {}
-#   securityContext: {}
-#   # Add additional volumes and mounts to deployments
-#   extraVolumeMounts: {}
-#   extraVolumes: {}
-#   # Add sidecars
-#   extraContainers: {}
-#   # Toggle serviceAccount creation
-#   serviceAccount.create: true
-#   # Customize service account name
-#   serviceAccount.name: ""
-#   # Override service type (defaults to ClusterIP)
-#   serviceType: ""
-#   # Set disk size on PVC's for stateful deployments
-#   storageSize: ""
-#   # Optionally bind PVC's to an existing PV
-#   volumeName: ""
-#   # Use an existing configmap (specified by name) instead of creating one
-#   existingConfig: ""
-#   # Toggle deployment of applications on/off. Applies to databases and third-party applications
-#   enabled: true
-
 executor:
   enabled: true
   image:
