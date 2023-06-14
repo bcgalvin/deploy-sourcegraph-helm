@@ -43,28 +43,7 @@ executor:
   resources:
     limits:
       cpu: "12"
-      memory: "26G"
+      memory: "25G"
     requests:
       cpu: "10"
-      memory: "13G"
-  env:
-    EXECUTOR_FRONTEND_URL:
-      value: "https://sourcegraph.ml.bestegg.com"
-    EXECUTOR_FRONTEND_PASSWORD:
-      value: "YyJnO5fYlHPi51RMaNNheEcYQ0NxwU3xFXYC"
-    EXECUTOR_QUEUE_NAME:
-      value: "codeintel"
-    EXECUTOR_MAXIMUM_NUM_JOBS:
-      value: "2"
-    EXECUTOR_USE_FIRECRACKER:
-      value: "false"
-    EXECUTOR_JOB_NUM_CPUS:
-      value: "5"
-    EXECUTOR_JOB_MEMORY:
-      value: "12G"
-    DOCKER_HOST:
-      value: "tcp://localhost:2375"
-    TMPDIR:
-      value: "/scratch"
-    EXECUTOR_KEEP_WORKSPACES:
-      value: "true"
+      memory: "22G"

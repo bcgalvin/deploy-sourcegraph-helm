@@ -1,4 +1,3 @@
-{{- if .Values.executor.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,7 +13,7 @@ spec:
   selector:
     matchLabels:
       app: executor
-  minReadySeconds: 15
+  minReadySeconds: 10
   replicas: 1
   revisionHistoryLimit: 10
   strategy:
@@ -43,13 +42,12 @@ spec:
               command:
                 - /usr/bin/pgrep
                 - /usr/local/bin/executor
-            periodSeconds: 10
+            periodSeconds: 5
           terminationMessagePolicy: FallbackToLogsOnError
-          env:
-            {{- range $name, $item := .Values.executor.env }}
-            - name: {{ $name }}
-              {{- $item | toYaml | nindent 14 }}
-            {{- end }}
+          # Refer to https://docs.sourcegraph.com/admin/executors/deploy_executors_binary#step-2-setup-environment-variables on how to populate these variables
+          envFrom:
+            - configMapRef:
+                name: executor-config
           volumeMounts:
             - mountPath: /scratch
               name: executor-scratch
@@ -59,11 +57,11 @@ spec:
           securityContext:
             privileged: true
           command:
-            - "dockerd"
-            - "--tls=false"
-            - "--mtu=1200"
-            - "--registry-mirror=http://private-docker-registry:5000"
-            - "--host=tcp://0.0.0.0:2375"
+            - 'dockerd'
+            - '--tls=false'
+            - '--mtu=1200'
+            - '--registry-mirror=http://private-docker-registry:5000'
+            - '--host=tcp://0.0.0.0:2375'
           livenessProbe:
             tcpSocket:
               port: 2375
@@ -96,10 +94,8 @@ spec:
           emptyDir:
             # Ensure we don't cause disk pressure on nodes. This value can be adjusted based on the size of the batch change or code intel requirements.
             # Refer to https://docs.sourcegraph.com/admin/executors/deploy_executors#resource-recommendations for more information
-            sizeLimit: 100Gi
+            sizeLimit: 20Gi
         - name: docker-config
           configMap:
             defaultMode: 420
             name: docker-config
-
-{{- end }}

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: executor-config
+  labels:
+    app: executor
+    deploy: sourcegraph
+    sourcegraph-resource-requires: no-cluster-admin
+    app.kubernetes.io/component: executor
+# Refer to https://docs.sourcegraph.com/admin/executors/deploy_executors_binary#step-2-setup-environment-variables on how to populate these variables
+data:
+  EXECUTOR_FRONTEND_URL: "https://sourcegraph.ml.bestegg.com"
+  EXECUTOR_FRONTEND_PASSWORD: "YyJnO5fYlHPi51RMaNNheEcYQ0NxwU3xFXYC"
+  EXECUTOR_QUEUE_NAME: "codeintel"
+  EXECUTOR_MAXIMUM_NUM_JOBS: "2"
+  EXECUTOR_USE_FIRECRACKER: "false"
+  EXECUTOR_JOB_NUM_CPUS: "5"
+  EXECUTOR_JOB_MEMORY: "12G"
+  DOCKER_HOST: "tcp://localhost:2375"
+  TMPDIR: "/scratch"
+  EXECUTOR_KEEP_WORKSPACES: "true"
