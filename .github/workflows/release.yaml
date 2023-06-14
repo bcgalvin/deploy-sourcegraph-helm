@@ -5,11 +5,16 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  
 env:
   helm-version: "v3.9.2"
 
 jobs:
   release:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

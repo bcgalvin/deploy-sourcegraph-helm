@@ -1,0 +1,1 @@
+helm upgrade --install --namespace  sourcegraph -f values.yaml --version 5.0.61 sg-executor bgsourcegraph/sourcegraph-executor
