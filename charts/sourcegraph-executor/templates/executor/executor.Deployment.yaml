@@ -14,7 +14,7 @@ spec:
   selector:
     matchLabels:
       app: executor
-  minReadySeconds: 10
+  minReadySeconds: 15
   replicas: 1
   revisionHistoryLimit: 10
   strategy:
@@ -43,7 +43,7 @@ spec:
               command:
                 - /usr/bin/pgrep
                 - /usr/local/bin/executor
-            periodSeconds: 5
+            periodSeconds: 10
           terminationMessagePolicy: FallbackToLogsOnError
           env:
             {{- range $name, $item := .Values.executor.env }}

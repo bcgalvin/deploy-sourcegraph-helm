@@ -42,11 +42,11 @@ executor:
   enabled: true
   resources:
     limits:
-      cpu: "20"
-      memory: "48G"
+      cpu: "12"
+      memory: "26G"
     requests:
-      cpu: "8"
-      memory: "36G"
+      cpu: "10"
+      memory: "13G"
   env:
     EXECUTOR_FRONTEND_URL:
       value: "https://sourcegraph.ml.bestegg.com"
