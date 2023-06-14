@@ -9,24 +9,24 @@ sourcegraph:
     # -- When set to true, sourcegraph.image.defaultTag is used as the default defaultTag for all services, instead of service-specific default defaultTags
     useGlobalTagAsDefault: false
   # -- Mount named secrets containing docker credentials
-  imagePullSecrets: []
+  imagePullSecrets: [ ]
   # -- Add a global label to all resources
-  labels: {}
+  labels: { }
   # -- Set a custom name for the app.kubernetes.io/name annotation
   nameOverride: ""
   # -- Affinity,
   # learn more from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
-  affinity: {}
+  affinity: { }
   # -- NodeSelector,
   # learn more from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector)
-  nodeSelector: {}
+  nodeSelector: { }
   # -- Tolerations,
   # learn more from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
-  tolerations: []
+  tolerations: [ ]
   # -- Add extra annotations to attach to all pods
-  podAnnotations: {}
+  podAnnotations: { }
   # -- Add extra labels to attach to all pods
-  podLabels: {}
+  podLabels: { }
 
 
 
@@ -50,13 +50,10 @@ executor:
       cpu: "8"
       memory: "36G"
   env:
-    # -- The external URL of the Sourcegraph instance. Required.
     EXECUTOR_FRONTEND_URL:
       value: "https://sourcegraph.ml.bestegg.com"
-    # -- The shared secret configured in the Sourcegraph instance site config under executors.accessToken. Required.
     EXECUTOR_FRONTEND_PASSWORD:
       value: "YyJnO5fYlHPi51RMaNNheEcYQ0NxwU3xFXYC"
-    # -- The name of the queue to pull jobs from to. Possible values: batches and codeintel. Required.
     EXECUTOR_QUEUE_NAME:
       value: "codeintel"
     EXECUTOR_MAXIMUM_NUM_JOBS:
@@ -64,10 +61,10 @@ executor:
     EXECUTOR_USE_FIRECRACKER:
       value: "false"
     EXECUTOR_JOB_NUM_CPUS:
-    value: "5"
+      value: "5"
     EXECUTOR_JOB_MEMORY:
-     value: "12G"
+      value: "12G"
     DOCKER_HOST:
-      value: tcp://localhost:2375
+      value: "tcp://localhost:2375"
     TMPDIR:
-      value: /scratch
+      value: "/scratch"
