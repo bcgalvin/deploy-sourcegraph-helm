@@ -1,16 +1,12 @@
-{{- if .Values.privateDockerRegistry.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
-  {{- if .Values.privateDockerRegistry.serviceAnnotations }}
-    annotations:
-    {{- toYaml .Values.privateDockerRegistry.serviceAnnotations | nindent 4 }}
-  {{- end }}
   labels:
-    app: private-docker-registry
     deploy: sourcegraph
+    sourcegraph-resource-requires: no-cluster-admin
     app.kubernetes.io/component: private-docker-registry
   name: private-docker-registry
+  namespace: default
 spec:
   ports:
     - name: http
@@ -20,4 +16,3 @@ spec:
   selector:
     app: private-docker-registry
   type: ClusterIP
-{{- end }}

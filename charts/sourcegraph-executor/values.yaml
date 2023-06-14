@@ -1,6 +1,3 @@
-# These values are dervied from https://github.com/sourcegraph/deploy-sourcegraph-helm/blob/main/charts/sourcegraph/values.yaml
-
-### Common Configuration ###
 sourcegraph:
   image:
     # -- Global docker image tag
@@ -32,25 +29,13 @@ sourcegraph:
   podLabels: {}
 
 
+
 storageClass:
-  # -- Enable creation of storageClass. Defaults to Google Cloud Platform. Disable if you have your own existing storage class
-  create: false
-  # -- Name of the storageClass.
-  # Use to customize to the existing storage class name
-  name: sourcegraph
-  # -- Name of the storageClass provisioner,
-  # learn more from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/#provisioner)
-  # and consult your cloud provider persistent storage documentation
-  provisioner: kubernetes.io/gce-pd
-  # -- Value of `type` key in storageClass `parameters`,
-  # consult your cloud provider persistent storage documentation
-  type: pd-ssd
-  # -- Extra parameters of storageClass,
-  # consult your cloud provider persistent storage documentation
-  parameters: {}
-  # -- Persistent volumes topology configuration,
-  # learn more from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/storage-classes/#allowed-topologies)
-  allowedTopologies: {}
+  create: true
+  type: gp3
+  provisioner: kubernetes.io/aws-ebs
+  volumeBindingMode: WaitForFirstConsumer
+  reclaimPolicy: Retain
 
 
 # Generic application configuration options, used by most applications below
@@ -102,15 +87,14 @@ storageClass:
 executor:
   enabled: true
   image:
-    defaultTag: 5.0.5@sha256:03cbbf4e51aafd37f9e6be114ab702c173b766456a0008a95c0ee17f919a9861
     name: "executor"
   resources:
     limits:
-      cpu: "16"
+      cpu: "20"
       memory: "48G"
     requests:
-      cpu: "4"
-      memory: "12G"
+      cpu: "8"
+      memory: "36G"
   env:
     # -- The external URL of the Sourcegraph instance. Required.
     EXECUTOR_FRONTEND_URL:
@@ -122,16 +106,14 @@ executor:
     EXECUTOR_QUEUE_NAME:
       value: "codeintel"
     EXECUTOR_MAXIMUM_NUM_JOBS:
-      value: "1"
-
-dind:
-  image:
-    registry: index.docker.io
-    repository: docker
-    tag: 20.10.22-dind
-
-privateDockerRegistry:
-  image:
-    registry: index.docker.io
-    repository: docker/regisry
-    tag: 2
+      value: "3"
+    EXECUTOR_USE_FIRECRACKER:
+      value: "false"
+    EXECUTOR_JOB_NUM_CPUS:
+    value: "5"
+    EXECUTOR_JOB_MEMORY:
+     value: "12G"
+    DOCKER_HOST:
+      value: tcp://localhost:2375
+    TMPDIR:
+      value: /scratch

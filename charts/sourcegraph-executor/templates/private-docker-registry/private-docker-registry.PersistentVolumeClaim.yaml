@@ -1,19 +1,15 @@
-{{- if .Values.privateDockerRegistry.enabled -}}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: private-docker-registry
   labels:
     deploy: sourcegraph
+    sourcegraph-resource-requires: no-cluster-admin
     app.kubernetes.io/component: private-docker-registry
-  name: private-docker-registry
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.privateDockerRegistry.storageSize }}
-  storageClassName: {{ .Values.storageClass.name }}
-  {{- if .Values.privateDockerRegistry.volumeName }}
-  volumeName: {{ .Values.privateDockerRegistry.volumeName }}
-  {{- end }}
-{{- end }}
+      # To be adjusted based on the number and size of images used in batch changes and auto-indexing
+      storage: 100Gi
