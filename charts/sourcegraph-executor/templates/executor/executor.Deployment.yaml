@@ -77,9 +77,9 @@ spec:
             - name: EXECUTOR_USE_FIRECRACKER
               value: "false"
             - name: EXECUTOR_JOB_NUM_CPUS
-              value: "0"
+              value: "4"
             - name: EXECUTOR_JOB_MEMORY
-              value: "0"
+              value: "12G"
             - name: DOCKER_HOST
               value: tcp://localhost:2375
             - name: TMPDIR
