@@ -52,7 +52,7 @@ spec:
             - mountPath: /scratch
               name: executor-scratch
         - name: dind
-          image: index.docker.io/sourcegraph/5.0.6@sha256:51c810393d5959bf07365b410f129580a48427a8a78a881735a9da74943dc18a
+          image: index.docker.io/sourcegraph/dind:5.0.6@sha256:51c810393d5959bf07365b410f129580a48427a8a78a881735a9da74943dc18a
           imagePullPolicy: Always
           securityContext:
             privileged: true
