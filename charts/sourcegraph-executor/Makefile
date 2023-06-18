@@ -1,4 +1,4 @@
-VERSION=5.2.4
+VERSION=5.2.5
 
 update:
 	helm repo update
