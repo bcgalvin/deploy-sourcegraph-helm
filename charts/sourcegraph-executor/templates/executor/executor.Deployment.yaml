@@ -94,7 +94,7 @@ spec:
           emptyDir:
             # Ensure we don't cause disk pressure on nodes. This value can be adjusted based on the size of the batch change or code intel requirements.
             # Refer to https://docs.sourcegraph.com/admin/executors/deploy_executors#resource-recommendations for more information
-            sizeLimit: 20Gi
+            sizeLimit: 100Gi
         - name: docker-config
           configMap:
             defaultMode: 420
