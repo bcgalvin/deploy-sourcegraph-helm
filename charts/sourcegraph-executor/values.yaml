@@ -42,8 +42,8 @@ executor:
   enabled: true
   resources:
     limits:
-      cpu: "24"
-      memory: "52G"
+      cpu: "40"
+      memory: "80G"
     requests:
-      cpu: "20"
-      memory: "48G"
+      cpu: "32"
+      memory: "72G"
