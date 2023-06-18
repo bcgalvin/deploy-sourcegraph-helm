@@ -15,6 +15,17 @@ entries:
   sourcegraph-executor:
   - apiVersion: v2
     appVersion: 5.0.6
+    created: "2023-06-18T01:46:04.83426323Z"
+    description: Chart for installing Sourcegraph executors
+    digest: 851901f6e1e44c27378970f72f68e6e0cf623d84f9f4de55c8f9175a9d3623c0
+    icon: https://sourcegraph.com/favicon.ico
+    name: sourcegraph-executor
+    type: application
+    urls:
+    - https://github.com/bcgalvin/deploy-sourcegraph-helm/releases/download/sourcegraph-executor-5.2.2/sourcegraph-executor-5.2.2.tgz
+    version: 5.2.2
+  - apiVersion: v2
+    appVersion: 5.0.6
     created: "2023-06-15T15:10:19.229885953Z"
     description: Chart for installing Sourcegraph executors
     digest: 0c2035a4d0e5c9d462de9bac07b520f96b3fc9f9f3e1801bc19e7c3b0fee0f8a
@@ -179,4 +190,4 @@ entries:
     urls:
     - https://github.com/bcgalvin/deploy-sourcegraph-helm/releases/download/sourcegraph-migrator-5.0.5/sourcegraph-migrator-5.0.5.tgz
     version: 5.0.5
-generated: "2023-06-15T15:10:19.229957553Z"
+generated: "2023-06-18T01:46:04.834640936Z"
