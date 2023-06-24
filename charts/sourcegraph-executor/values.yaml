@@ -33,8 +33,8 @@ executor:
   enabled: true
   resources:
     limits:
-      cpu: "12"
-      memory: "30G"
+      cpu: "18"
+      memory: "50G"
     requests:
-      cpu: "8"
-      memory: "24G"
+      cpu: "16"
+      memory: "48G"
