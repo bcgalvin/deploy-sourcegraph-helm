@@ -1,4 +1,4 @@
-VERSION=5.2.9
+VERSION=5.2.11
 
 update:
 	helm repo update
